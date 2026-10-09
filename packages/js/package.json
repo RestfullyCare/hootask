@@ -9,6 +9,8 @@
     "url": "git+https://github.com/RestfullyCare/hootask.git",
     "directory": "packages/js"
   },
+  "homepage": "https://github.com/RestfullyCare/hootask/tree/main/packages/js#readme",
+  "bugs": "https://github.com/RestfullyCare/hootask/issues",
   "sideEffects": false,
   "exports": {
     ".": "./src/index.ts"
