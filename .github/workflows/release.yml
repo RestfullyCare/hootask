@@ -26,5 +26,6 @@ jobs:
       - run: pnpm typecheck
       - run: pnpm test
       - run: pnpm build
-      # Tag checkouts are a detached HEAD, so skip pnpm's branch check.
-      - run: pnpm -r publish --no-git-checks
+      # npm, not pnpm, does the OIDC exchange. The tarballs from `pnpm build`
+      # already have workspace: ranges and publishConfig applied.
+      - run: for t in packages/*/.pack/*.tgz; do npm publish "$t"; done
