@@ -9,10 +9,6 @@ export default defineConfig(
   js.configs.recommended,
   tseslint.configs.recommended,
   {
-    files: ["docs/*.mjs"],
-    languageOptions: { globals: { process: "readonly" } },
-  },
-  {
     files: ["packages/react/**/*.{ts,tsx}"],
     extends: [reactHooks.configs.flat.recommended],
   }

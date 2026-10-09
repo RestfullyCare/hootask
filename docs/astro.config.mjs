@@ -2,15 +2,14 @@
 import starlight from "@astrojs/starlight"
 import { defineConfig } from "astro/config"
 import starlightTypeDoc, { typeDocSidebarGroup } from "starlight-typedoc"
+import starlightVersions from "starlight-versions"
 
 export default defineConfig({
   site: "https://restfullycare.github.io",
-  // build-site.sh builds older versions under /hootask/v<major.minor>/.
-  base: process.env.DOCS_BASE ?? "/hootask",
+  base: "/hootask",
   integrations: [
     starlight({
       title: "Hootask SDK",
-      components: { SocialIcons: "./src/components/SocialIcons.astro" },
       social: [
         {
           icon: "github",
@@ -27,6 +26,9 @@ export default defineConfig({
             readme: "./api-readme.md",
           },
         }),
+        // After typedoc, so archived versions include the generated API pages.
+        // Add the outgoing version here when releasing a new minor or major.
+        starlightVersions({ versions: [{ slug: "0.0.1" }] }),
       ],
       sidebar: [
         { label: "Start here", items: ["getting-started"] },
