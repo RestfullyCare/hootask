@@ -49,11 +49,16 @@ A Husky pre-commit hook runs ESLint and Prettier on staged files.
 
 Both packages share one version (lockstep).
 
-1. Set the same `version` in `packages/js/package.json` and
+1. New minor or major only: archive the outgoing version's docs by adding
+   `{ slug: "<outgoing version>" }` to `starlightVersions({ versions })` in
+   `docs/astro.config.mjs`, run `pnpm --filter docs build`, and commit the
+   generated `docs/src/content/docs/<version>/` and
+   `docs/src/content/versions/<version>.json`.
+2. Set the same `version` in `packages/js/package.json` and
    `packages/react/package.json`; merge to `main` through a pull request.
-2. Publish a GitHub Release with tag `v<version>`:
+3. Publish a GitHub Release with tag `v<version>`:
    `gh release create v<version> --generate-notes` (or the GitHub UI).
 
 `release.yml` runs on the published release: checks the tag matches both
 versions, runs the full CI, and publishes with npm trusted publishing (OIDC)
-and provenance.
+and provenance. `docs.yml` redeploys the docs site.
