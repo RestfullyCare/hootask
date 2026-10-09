@@ -1,0 +1,14 @@
+name: Question
+description: Ask how to do something with the SDK
+labels: [question]
+body:
+  - type: textarea
+    id: question
+    attributes:
+      label: Question
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: What have you tried?

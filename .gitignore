@@ -1,0 +1,12 @@
+node_modules
+.DS_Store
+*.local
+.env*
+*.tsbuildinfo
+
+# build output
+dist
+.pack
+
+# local design docs (never committed)
+.specs/

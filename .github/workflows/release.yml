@@ -1,0 +1,30 @@
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: read
+  id-token: write # npm trusted publishing + provenance
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Tag matches package versions
+        run: |
+          for p in packages/*/package.json; do
+            v=$(node -p "require('./$p').version")
+            [ "v$v" = "$GITHUB_REF_NAME" ] || { echo "::error::$p is $v, tag is $GITHUB_REF_NAME"; exit 1; }
+          done
+      - uses: jdx/mise-action@v5
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm lint
+      - run: pnpm format:check
+      - run: pnpm typecheck
+      - run: pnpm test
+      - run: pnpm build
+      # Tag checkouts are a detached HEAD, so skip pnpm's branch check.
+      - run: pnpm -r publish --no-git-checks
