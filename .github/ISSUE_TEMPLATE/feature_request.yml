@@ -1,6 +1,6 @@
 name: Feature request
 description: Suggest something the SDK should do
-labels: [enhancement]
+labels: [Feature]
 body:
   - type: textarea
     id: problem
