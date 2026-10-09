@@ -1,2 +1,6 @@
-// Placeholder until the SDK API lands.
+/**
+ * Headless, framework-agnostic Hootask SDK.
+ *
+ * @packageDocumentation
+ */
 export {}
