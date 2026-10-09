@@ -49,4 +49,5 @@ Both packages share one version (lockstep).
 2. Commit, tag `v<version>`, push the tag.
 
 `release.yml` checks the tag matches both versions, runs the full CI, and
-publishes with npm trusted publishing (OIDC) and provenance.
+publishes with npm trusted publishing (OIDC) and provenance, then creates a
+GitHub Release with generated notes.
