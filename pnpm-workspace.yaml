@@ -1,5 +1,6 @@
 packages:
   - packages/*
+  - docs
 
 catalog:
   typescript: 6.0.3
@@ -7,3 +8,6 @@ catalog:
 
 allowBuilds:
   esbuild: true
+
+minimumReleaseAgeExclude:
+  - "@astrojs/starlight@0.42.6"

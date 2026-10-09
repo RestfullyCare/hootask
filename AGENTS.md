@@ -8,6 +8,9 @@ Public, MIT-licensed Hootask SDK, published to npm.
   or framework APIs (`lib: ES2023`, `types: []`, tsdown `platform: neutral`).
 - `packages/react`: `@hootask/react`, built on `@hootask/js`; `react` is a peer
   dependency.
+- `docs`: SDK docs site (Starlight). The API reference is generated from TSDoc
+  in `packages/*` at build time, so document exports with TSDoc. `pnpm --filter
+docs dev` to preview. Deploys to GitHub Pages on each published release.
 
 In the workspace, `exports` point at `src/*.ts`; `publishConfig.exports` swaps
 in `dist/` on pack.
@@ -35,6 +38,8 @@ A Husky pre-commit hook runs ESLint and Prettier on staged files.
 
 ## Conventions
 
+- `main` is protected: pull request required, CI must pass, linear history
+  (squash or rebase).
 - Conventional Commits (`feat(js): …`, `fix(react): …`, `chore: …`).
 - Branch from the Linear issue (Linear's "copy git branch name") so it links back.
 - Don't add runtime dependencies to `@hootask/js` without a strong reason; it
@@ -45,7 +50,7 @@ A Husky pre-commit hook runs ESLint and Prettier on staged files.
 Both packages share one version (lockstep).
 
 1. Set the same `version` in `packages/js/package.json` and
-   `packages/react/package.json`; commit and push to `main`.
+   `packages/react/package.json`; merge to `main` through a pull request.
 2. Publish a GitHub Release with tag `v<version>`:
    `gh release create v<version> --generate-notes` (or the GitHub UI).
 

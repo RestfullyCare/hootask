@@ -5,7 +5,7 @@ import reactHooks from "eslint-plugin-react-hooks"
 import { defineConfig, globalIgnores } from "eslint/config"
 
 export default defineConfig(
-  globalIgnores(["**/dist/", "**/.pack/"]),
+  globalIgnores(["**/dist/", "**/.pack/", "**/.astro/"]),
   js.configs.recommended,
   tseslint.configs.recommended,
   {

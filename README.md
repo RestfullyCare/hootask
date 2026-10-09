@@ -9,6 +9,8 @@ Render Hootask forms in your own UI.
 
 > Pre-release: no public API yet.
 
+Docs: https://restfullycare.github.io/hootask/
+
 ## Install
 
 ```bash
