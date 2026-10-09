@@ -2,7 +2,6 @@
 import starlight from "@astrojs/starlight"
 import { defineConfig } from "astro/config"
 import starlightTypeDoc, { typeDocSidebarGroup } from "starlight-typedoc"
-import starlightVersions from "starlight-versions"
 
 export default defineConfig({
   site: "https://restfullycare.github.io",
@@ -26,9 +25,6 @@ export default defineConfig({
             readme: "./api-readme.md",
           },
         }),
-        // After typedoc, so archived versions include the generated API pages.
-        // Add the outgoing version here when releasing a new minor or major.
-        starlightVersions({ versions: [{ slug: "0.0.1" }] }),
       ],
       sidebar: [
         { label: "Start here", items: ["getting-started"] },
