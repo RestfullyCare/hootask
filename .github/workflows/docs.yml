@@ -22,11 +22,12 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0 # all release tags; each version is built from its tag
       - uses: jdx/mise-action@v5
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm --filter docs build
+      - run: docs/build-site.sh site
       - uses: actions/upload-pages-artifact@v5
         with:
-          path: docs/dist
+          path: site
       - id: deployment
         uses: actions/deploy-pages@v5

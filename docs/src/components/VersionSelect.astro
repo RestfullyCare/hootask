@@ -1,0 +1,51 @@
+---
+// Every version's build reads the same list from the Pages site root, written
+// by build-site.sh, so older builds still show newer versions.
+const root = "/hootask/"
+---
+
+<select
+  class="version-select"
+  aria-label="Docs version"
+  data-root={root}
+  data-base={import.meta.env.BASE_URL}
+  hidden></select>
+
+<script>
+  type Version = { label: string; path: string }
+
+  const slash = (path: string) => path.replace(/\/?$/, "/")
+
+  for (const select of document.querySelectorAll<HTMLSelectElement>(
+    ".version-select"
+  )) {
+    const root = select.dataset.root!
+    const base = slash(select.dataset.base!)
+
+    fetch(`${root}versions.json`)
+      .then((res) => (res.ok ? (res.json() as Promise<Version[]>) : []))
+      .then((versions) => {
+        if (versions.length < 2) return
+        for (const { label, path } of versions) {
+          select.add(new Option(label, path, false, path === base))
+        }
+        select.hidden = false
+        select.addEventListener("change", () => {
+          // Same page in the chosen version; Starlight's 404 if it doesn't exist there.
+          location.href = select.value + location.pathname.slice(base.length)
+        })
+      })
+      .catch(() => {})
+  }
+</script>
+
+<style>
+  .version-select {
+    background: transparent;
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 0.25rem;
+    color: var(--sl-color-gray-2);
+    font-size: var(--sl-text-sm);
+    padding: 0.25rem 0.5rem;
+  }
+</style>
