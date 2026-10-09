@@ -45,9 +45,10 @@ A Husky pre-commit hook runs ESLint and Prettier on staged files.
 Both packages share one version (lockstep).
 
 1. Set the same `version` in `packages/js/package.json` and
-   `packages/react/package.json`.
-2. Commit, tag `v<version>`, push the tag.
+   `packages/react/package.json`; commit and push to `main`.
+2. Publish a GitHub Release with tag `v<version>`:
+   `gh release create v<version> --generate-notes` (or the GitHub UI).
 
-`release.yml` checks the tag matches both versions, runs the full CI, and
-publishes with npm trusted publishing (OIDC) and provenance, then creates a
-GitHub Release with generated notes.
+`release.yml` runs on the published release: checks the tag matches both
+versions, runs the full CI, and publishes with npm trusted publishing (OIDC)
+and provenance.
